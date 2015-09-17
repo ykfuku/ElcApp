@@ -5,6 +5,7 @@ var BrowserWindow = require('browser-window');
 require('crash-reporter').start();
 
 var mainWindow = null;
+var winExcel = null;
 
 // 全てのウィンドウが閉じたらアプリケーションを終了します。
 app.on('window-all-closed', function() {
@@ -23,4 +24,20 @@ app.on('ready', function() {
   mainWindow.on('closed', function() {
     mainWindow = null;
   });
+ 
+ 
+ 
+ 
+  // Excelウィンドウを作成します。
+  winExcel = new BrowserWindow({width: 800, height: 600});
+
+  // Excelウィンドウに表示するURLを指定します。
+  winExcel.loadUrl('file://' + __dirname + '/Excel/Excel.html');
+
+  // Excelウィンドウが閉じられたときの処理
+  winExcel.on('closed', function() {
+    winExcel = null;
+  });
+  
+ 
 });
